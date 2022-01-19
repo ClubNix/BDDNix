@@ -18,3 +18,5 @@ services:
       MARIADB_DATABASE : 'nix'
     volumes:
       - ./initialization-scripts:/docker-entrypoint-initdb.d:ro
+    ports:
+      - 3306:3306
