@@ -1,53 +1,51 @@
-USE josix;
-
-CREATE TABLE IF NOT EXISTS User (
+CREATE TABLE IF NOT EXISTS josix.User (
     idUser BIGINT,
-    joinVoc DATETIME,
+    joinVoc TIMESTAMP,
     PRIMARY KEY(idUser)
 );
 
-CREATE TABLE IF NOT EXISTS Guild (
+CREATE TABLE IF NOT EXISTS josix.Guild (
     idGuild BIGINT,
     totalMember SMALLINT DEFAULT 0,
-    sendStatus CHAR(1) DEFAULT "0",
-    lastSend DATETIME DEFAULT NOW(),
+    sendStatus CHAR(1) DEFAULT '0',
+    lastSend TIMESTAMP DEFAULT NOW(),
     chanStat BIGINT NOT NULL,
     PRIMARY KEY(idGuild)
 );
 
-CREATE TABLE IF NOT EXISTS Channel (
+CREATE TABLE IF NOT EXISTS josix.Channel (
     idChannel BIGINT,
     idGuild BIGINT NOT NULL,
     nbMsg BIGINT DEFAULT 0,
     PRIMARY KEY(idChannel),
-    CONSTRAINT fk_guild_channel FOREIGN KEY(idGuild) REFERENCES Guild(idGuild)
+    CONSTRAINT fk_guild_channel FOREIGN KEY(idGuild) REFERENCES josix.Guild(idGuild)
 );
 
-CREATE TABLE IF NOT EXISTS MsgReact (
+CREATE TABLE IF NOT EXISTS josix.MsgReact (
     idMsg BIGINT NOT NULL,
     idReact BIGINT NOT NULL,
     idRole BIGINT NOT NULL,
     idGuild BIGINT NOT NULL,
-    CONSTRAINT fk_guild_msgR_id FOREIGN KEY(idGuild) REFERENCES Guild(idGuild)
+    CONSTRAINT fk_guild_msgR_id FOREIGN KEY(idGuild) REFERENCES josix.Guild(idGuild)
 );
 
 --
 --
 --
 
-CREATE TABLE IF NOT EXISTS UserGuild (
+CREATE TABLE IF NOT EXISTS josix.UserGuild (
     idUser BIGINT NOT NULL,
     idGuild BIGINT NOT NULL,
     nbMsg BIGINT DEFAULT 0,
     nbSecondVC INT DEFAULT 0,
-    CONSTRAINT fk_user_ug_id FOREIGN KEY(idUser) REFERENCES User(idUser),
-    CONSTRAINT fk_guild_ug_id FOREIGN KEY(idGuild) REFERENCES Guild(idGuild)
+    CONSTRAINT fk_user_ug_id FOREIGN KEY(idUser) REFERENCES josix.User(idUser),
+    CONSTRAINT fk_guild_ug_id FOREIGN KEY(idGuild) REFERENCES josix.Guild(idGuild)
 );
 
-CREATE TABLE IF NOT EXISTS UserChannel (
+CREATE TABLE IF NOT EXISTS josix.UserChannel (
     idUser BIGINT NOT NULL,
     idChannel BIGINT NOT NULL,
     nbMsg INT DEFAULT 0,
-    CONSTRAINT fk_user_uc_id FOREIGN KEY(idUser) REFERENCES User(idUser),
-    CONSTRAINT fk_channel_uc_id FOREIGN KEY(idChannel) REFERENCES Channel(idChannel)
+    CONSTRAINT fk_user_uc_id FOREIGN KEY(idUser) REFERENCES josix.User(idUser),
+    CONSTRAINT fk_channel_uc_id FOREIGN KEY(idChannel) REFERENCES josix.Channel(idChannel)
 );
