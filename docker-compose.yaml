@@ -6,7 +6,8 @@ services:
     image: adminer
     restart: always
     environment:
-      ADMINER_DESIGN: 'dracula'
+      ADMINER_DESIGN: 'hydra'
+      ADMINER_DEFAULT_SERVER: 'postgresql'
     ports:
       - 8080:8080
 
