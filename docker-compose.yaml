@@ -6,17 +6,19 @@ services:
     image: adminer
     restart: always
     environment:
-      ADMINER_DESIGN: 'dracula'
+      ADMINER_DESIGN: 'hydra'
+      ADMINER_DEFAULT_SERVER: 'postgresql'
     ports:
       - 8080:8080
 
   db:
-    image: mariadb:latest
+    image: postgres:latest
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: 'root'
-      MARIADB_DATABASE : 'nix'
+      POSTGRES_USER: 'root'
+      POSTGRES_PASSWORD: 'root'
+      POSTGRES_DB: 'nix'
     volumes:
-      - ./initialization-scripts:/docker-entrypoint-initdb.d:ro
+      - ./initialization-scripts:/docker-entrypoint-initdb.d/
     ports:
-      - 3306:3306
+      - 5432:5432
