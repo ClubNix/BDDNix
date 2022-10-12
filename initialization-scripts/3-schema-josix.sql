@@ -11,9 +11,9 @@ DROP TABLE josix.User;
 
 CREATE TABLE IF NOT EXISTS josix.User (
     idUser BIGINT,
+    elo INT DEFAULT 1000,
+    nbGames INT DEFAULT 0,
     joinVoc TIMESTAMP,
-    adr VARCHAR(64),
-    salt VARCHAR(32),
     PRIMARY KEY(idUser)
 );
 
@@ -32,6 +32,15 @@ CREATE TABLE IF NOT EXISTS josix.Channel (
     nbMsg BIGINT DEFAULT 0,
     PRIMARY KEY(idChannel),
     CONSTRAINT fk_guild_channel FOREIGN KEY(idGuild) REFERENCES josix.Guild(idGuild)
+);
+
+CREATE TABLE IF NOT EXISTS josix.DartLog (
+    idLog SERIAL,
+    idGuild BIGINT NOT NULL,
+    winnerName VARCHAR(64),
+    losersName VARCHAR(64) ARRAY,
+    PRIMARY KEY(idLog),
+    CONSTRAINT fk_guild_log_id FOREIGN KEY(idGuild) REFERENCES josix.Guild(idGuild)
 );
 
 CREATE TABLE IF NOT EXISTS josix.MsgReact (
