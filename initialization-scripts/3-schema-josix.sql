@@ -1,11 +1,11 @@
-DROP TABLE josix.MsgCouple;
-DROP TABLE josix.UserChannel;
-DROP TABLE josix.UserGuild;
-DROP TABLE josix.Channel;
-DROP TABLE josix.MsgReact;
-DROP TABLE josix.ReactCouple;
-DROP TABLE josix.Guild;
-DROP TABLE josix.User;
+DROP TABLE IF EXISTS josix.MsgCouple;
+DROP TABLE IF EXISTS josix.UserChannel;
+DROP TABLE IF EXISTS josix.UserGuild;
+DROP TABLE IF EXISTS josix.Channel;
+DROP TABLE IF EXISTS josix.MsgReact;
+DROP TABLE IF EXISTS josix.ReactCouple;
+DROP TABLE IF EXISTS josix.Guild;
+DROP TABLE IF EXISTS josix.User;
 
 --  
 
