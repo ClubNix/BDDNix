@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS josix.UserGuild;
 DROP TABLE IF EXISTS josix.Channel;
 DROP TABLE IF EXISTS josix.MsgReact;
 DROP TABLE IF EXISTS josix.ReactCouple;
+DROP TABLE IF EXISTS josix.DartLog;
 DROP TABLE IF EXISTS josix.Guild;
 DROP TABLE IF EXISTS josix.User;
 
@@ -14,6 +15,7 @@ CREATE TABLE IF NOT EXISTS josix.User (
     elo INT DEFAULT 1000,
     nbGames INT DEFAULT 0,
     joinVoc TIMESTAMP,
+    hbDate DATE, 
     PRIMARY KEY(idUser)
 );
 
@@ -22,7 +24,7 @@ CREATE TABLE IF NOT EXISTS josix.Guild (
     totalMember SMALLINT DEFAULT 0,
     sendStatus CHAR(1) DEFAULT '0',
     lastSend TIMESTAMP DEFAULT NOW(),
-    chanStat BIGINT NOT NULL,
+    chanNews BIGINT,
     PRIMARY KEY(idGuild)
 );
 
