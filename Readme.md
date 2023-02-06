@@ -27,7 +27,7 @@ Il est également possible de se connecter via un client externe tel que DBeaver
 ## Pré-requis
 Ajouter dans le dossier un fichier `.env` contenant les valeurs suivantes : 
 
-̀```
+```
 USER = your_user_here
 PSSWD = your_password_here 
 DB = database_name
