@@ -24,6 +24,15 @@ Les paramètres de connexion sont :
 
 Il est également possible de se connecter via un client externe tel que DBeaver, psql, etc. en utilisant le port 3306 et l'adresse localhost
 
+## Pré-requis
+Ajouter dans le dossier un fichier `.env` contenant les valeurs suivantes : 
+
+̀```
+USER = your_user_here
+PSSWD = your_password_here 
+DB = database_name
+```
+
 ### Quelques commandes utiles
 
 Docker gère les données de ses conteneurs dans des "Volumes", il peut être parfois intéréssant de faire des actions dessus.

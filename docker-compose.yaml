@@ -15,9 +15,9 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_USER: 'root'
-      POSTGRES_PASSWORD: 'root'
-      POSTGRES_DB: 'nix'
+      POSTGRES_USER: ${USER}
+      POSTGRES_PASSWORD: ${PSSWD}
+      POSTGRES_DB: ${DB}
     volumes:
       - ./initialization-scripts:/docker-entrypoint-initdb.d/
     ports:
