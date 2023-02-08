@@ -1,4 +1,4 @@
-version: '3.1'
+version: '2.4'
 
 services:
 
@@ -10,6 +10,10 @@ services:
       ADMINER_DEFAULT_SERVER: 'postgresql'
     ports:
       - 8080:8080
+    networks:
+        BridgeServer:
+            ipv4_address: ${IP_AD}
+
 
   db:
     image: postgres:latest
@@ -22,3 +26,26 @@ services:
       - ./initialization-scripts:/docker-entrypoint-initdb.d/
     ports:
       - 5432:5432
+    networks:
+        BridgeServer:
+            ipv4_address: ${IP_POST}
+
+
+##################################
+#
+# - You can delete the part below for your usecase 
+# - And the networks in the 
+#
+##################################
+
+
+networks:
+    BridgeServer:
+        name: ${NETWORK}
+        driver: ${DRIVER}
+        driver_opts: 
+            parent: ${PARENT}
+        ipam:
+            config:
+                - subnet: ${SUBNET}
+                  gateway: ${GATEWAY}

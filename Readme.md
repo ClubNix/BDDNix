@@ -16,10 +16,7 @@ Une fois cela fait, il suffit d'avoir un terminal ouvert à la racine du projet 
 Une fois les conteneurs lancés, il est possible de voir l'interface adminer à cette adresse: http://localhost:8080/ (permet de voir les données de manière visuelle).  
 Les paramètres de connexion sont : 
  - **Système:** PostgreSQL
- - **Serveur:** db (si on essaie de se connecter depuis l'extérieur, l'adresse sera `localhost` ou `127.0.0.1`)
- - **user:** root
- - **password:** root
- - **database**: nix 
+ - **Serveur:** db (si on essaie de se connecter depuis l'extérieur, l'adresse sera `localhost` ou `127.0.0.1`) 
  - **schemas**: josix, monix
 
 Il est également possible de se connecter via un client externe tel que DBeaver, psql, etc. en utilisant le port 3306 et l'adresse localhost
@@ -31,6 +28,13 @@ Ajouter dans le dossier un fichier `.env` contenant les valeurs suivantes :
 USER = your_user_here
 PSSWD = your_password_here 
 DB = database_name
+IP_AD = ip_adminer
+IP_POST = ip_postgre
+SUBNET = ip_subnet
+GATEWAY = ip_gateway
+NETWORK = network_name
+DRIVER = driver_name
+PARENT = parent_name
 ```
 
 ### Quelques commandes utiles
