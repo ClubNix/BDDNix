@@ -31,12 +31,12 @@ services:
             ipv4_address: ${IP_POST}
 
 
-##################################
+##################################################
 #
-# - You can delete the part below for your usecase 
-# - And the networks in the 
+# - You can delete the part below for your usecase
+# - As well as the "networks" part in each service
 #
-##################################
+##################################################
 
 
 networks:

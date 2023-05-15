@@ -1,10 +1,10 @@
 DROP TABLE IF EXISTS josix.MsgCouple;
-DROP TABLE IF EXISTS josix.UserChannel;
 DROP TABLE IF EXISTS josix.UserGuild;
-DROP TABLE IF EXISTS josix.Channel;
-DROP TABLE IF EXISTS josix.MsgReact;
 DROP TABLE IF EXISTS josix.ReactCouple;
+DROP TABLE IF EXISTS josix.MsgReact;
 DROP TABLE IF EXISTS josix.DartLog;
+DROP TABLE IF EXISTS josix.Games;
+DROP TABLE IF EXISTS josix.GameType;
 DROP TABLE IF EXISTS josix.Guild;
 DROP TABLE IF EXISTS josix.User;
 
@@ -14,26 +14,22 @@ CREATE TABLE IF NOT EXISTS josix.User (
     idUser BIGINT,
     elo INT DEFAULT 1000,
     nbGames INT DEFAULT 0,
-    joinVoc TIMESTAMP,
     hbDate DATE, 
     PRIMARY KEY(idUser)
 );
 
 CREATE TABLE IF NOT EXISTS josix.Guild (
     idGuild BIGINT,
-    totalMember SMALLINT DEFAULT 0,
-    sendStatus CHAR(1) DEFAULT '0',
-    lastSend TIMESTAMP DEFAULT NOW(),
     chanNews BIGINT,
+    xpNews BIGINT,
+    enableXP BOOLEAN DEFAULT TRUE,
     PRIMARY KEY(idGuild)
 );
 
-CREATE TABLE IF NOT EXISTS josix.Channel (
-    idChannel BIGINT,
-    idGuild BIGINT NOT NULL,
-    nbMsg BIGINT DEFAULT 0,
-    PRIMARY KEY(idChannel),
-    CONSTRAINT fk_guild_channel FOREIGN KEY(idGuild) REFERENCES josix.Guild(idGuild)
+CREATE TABLE IF NOT EXISTS josix.GameType (
+    idType SERIAL,
+    gameName VARCHAR(64),
+    PRIMARY KEY(idtype)
 );
 
 CREATE TABLE IF NOT EXISTS josix.DartLog (
@@ -54,32 +50,36 @@ CREATE TABLE IF NOT EXISTS josix.MsgReact (
 
 CREATE TABLE IF NOT EXISTS josix.ReactCouple (
     idCouple SERIAL,
-    nomEmoji VARCHAR(63) NOT NULL,
+    nomEmoji VARCHAR(64) NOT NULL,
     idRole BIGINT NOT NULL,
     PRIMARY KEY(idCouple)
 );
+
+CREATE TABLE IF NOT EXISTS josix.Games (
+    idGame SERIAL,
+    idType INT NOT NULL,
+    idUser BIGINT NOT NULL,
+    opponent BIGINT,
+    PRIMARY KEY(idGame),
+    CONSTRAINT fk_type_games_id FOREIGN KEY(idType) REFERENCES josix.GameType(idType),
+    CONSTRAINT fk_user_games_id FOREIGN KEY(idUser) REFERENCES josix.User(idUser)
+);
+
 
 --
 --  
 --
 
+
 CREATE TABLE IF NOT EXISTS josix.UserGuild (
     idUser BIGINT NOT NULL,
     idGuild BIGINT NOT NULL,
-    nbMsg BIGINT DEFAULT 0,
-    nbSecondVC INT DEFAULT 0,
+    xp INT DEFAULT 0,
+    lvl INT DEFAULT 0,
+    lastMessage TIMESTAMP DEFAULT NOW(),
     PRIMARY KEY(idUser, idGuild),
     CONSTRAINT fk_user_ug_id FOREIGN KEY(idUser) REFERENCES josix.User(idUser),
     CONSTRAINT fk_guild_ug_id FOREIGN KEY(idGuild) REFERENCES josix.Guild(idGuild)
-);
-
-CREATE TABLE IF NOT EXISTS josix.UserChannel (
-    idUser BIGINT NOT NULL,
-    idChannel BIGINT NOT NULL,
-    nbMsg INT DEFAULT 0,
-    PRIMARY KEY(idUser, idChannel),
-    CONSTRAINT fk_user_uc_id FOREIGN KEY(idUser) REFERENCES josix.User(idUser),
-    CONSTRAINT fk_channel_uc_id FOREIGN KEY(idChannel) REFERENCES josix.Channel(idChannel)
 );
 
 CREATE TABLE IF NOT EXISTS josix.MsgCouple (
