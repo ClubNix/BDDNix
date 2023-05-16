@@ -1,15 +1,3 @@
-DROP TABLE IF EXISTS josix.MsgCouple;
-DROP TABLE IF EXISTS josix.UserGuild;
-DROP TABLE IF EXISTS josix.ReactCouple;
-DROP TABLE IF EXISTS josix.MsgReact;
-DROP TABLE IF EXISTS josix.DartLog;
-DROP TABLE IF EXISTS josix.Games;
-DROP TABLE IF EXISTS josix.GameType;
-DROP TABLE IF EXISTS josix.Guild;
-DROP TABLE IF EXISTS josix.User;
-
---  
-
 CREATE TABLE IF NOT EXISTS josix.User (
     idUser BIGINT,
     elo INT DEFAULT 1000,
