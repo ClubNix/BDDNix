@@ -1,15 +1,3 @@
-DROP TABLE IF EXISTS josix.MsgCouple;
-DROP TABLE IF EXISTS josix.UserGuild;
-DROP TABLE IF EXISTS josix.ReactCouple;
-DROP TABLE IF EXISTS josix.MsgReact;
-DROP TABLE IF EXISTS josix.DartLog;
-DROP TABLE IF EXISTS josix.Games;
-DROP TABLE IF EXISTS josix.GameType;
-DROP TABLE IF EXISTS josix.Guild;
-DROP TABLE IF EXISTS josix.User;
-
---  
-
 CREATE TABLE IF NOT EXISTS josix.User (
     idUser BIGINT,
     elo INT DEFAULT 1000,
@@ -23,6 +11,11 @@ CREATE TABLE IF NOT EXISTS josix.Guild (
     chanNews BIGINT,
     xpNews BIGINT,
     enableXP BOOLEAN DEFAULT TRUE,
+    enableWelcome BOOLEAN DEFAULT FALSE,
+    welcomeChan BIGINT,
+    welcomeRole BIGINT,
+    welcomeText VARCHAR(512),
+    logNews BIGINT,
     PRIMARY KEY(idGuild)
 );
 
@@ -30,6 +23,12 @@ CREATE TABLE IF NOT EXISTS josix.GameType (
     idType SERIAL,
     gameName VARCHAR(64),
     PRIMARY KEY(idtype)
+);
+
+CREATE TABLE IF NOT EXISTS josix.Logs (
+    idLog INT NOT NULL,
+    logName VARCHAR(64) NOT NULL,
+    PRIMARY KEY(idLog)
 );
 
 CREATE TABLE IF NOT EXISTS josix.DartLog (
@@ -88,4 +87,12 @@ CREATE TABLE IF NOT EXISTS josix.MsgCouple (
     PRIMARY KEY(idMsg, idCouple),
     CONSTRAINT fk_msg_mc_id FOREIGN KEY(idMsg) REFERENCES josix.MsgReact(idMsg),
     CONSTRAINT fk_couple_mc_id FOREIGN KEY(idCouple) REFERENCES josix.ReactCouple(idCouple)
+);
+
+CREATE TABLE IF NOT EXIST josix.LogSelector (
+    idGuild BIGINT NOT NULL,
+    idLog BIGINT NOT NULL,
+    PRIMARY KEY(idGuild, idLog),
+    CONSTRAINT fk_guild_ls_id FOREIGN KEY(idGuild) REFERENCES josix.Guild(idGuild),
+    CONSTRAINT fk_log_ls_id FOREIGN KEY(idLog) REFERENCES josix.Logs(idLog)
 );
