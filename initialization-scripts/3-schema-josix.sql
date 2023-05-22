@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS josix.MsgCouple (
     CONSTRAINT fk_couple_mc_id FOREIGN KEY(idCouple) REFERENCES josix.ReactCouple(idCouple)
 );
 
-CREATE TABLE IF NOT EXIST josix.LogSelector (
+CREATE TABLE IF NOT EXISTS josix.LogSelector (
     idGuild BIGINT NOT NULL,
     idLog BIGINT NOT NULL,
     PRIMARY KEY(idGuild, idLog),
