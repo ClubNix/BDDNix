@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS josix.Guild (
     welcomeRole BIGINT,
     welcomeText VARCHAR(512),
     logNews BIGINT,
+    blockedCategories BIGINT ARRAY DEFAULT ARRAY[],
     PRIMARY KEY(idGuild)
 );
 
@@ -76,6 +77,7 @@ CREATE TABLE IF NOT EXISTS josix.UserGuild (
     xp INT DEFAULT 0,
     lvl INT DEFAULT 0,
     lastMessage TIMESTAMP DEFAULT NOW(),
+    xpBlocked BOOLEAN DEFAULT FALSE,
     PRIMARY KEY(idUser, idGuild),
     CONSTRAINT fk_user_ug_id FOREIGN KEY(idUser) REFERENCES josix.User(idUser),
     CONSTRAINT fk_guild_ug_id FOREIGN KEY(idGuild) REFERENCES josix.Guild(idGuild)
