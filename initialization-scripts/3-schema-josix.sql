@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS josix.Guild (
     welcomeRole BIGINT,
     welcomeText VARCHAR(512),
     logNews BIGINT,
-    blockedCategories BIGINT ARRAY DEFAULT ARRAY[],
+    blockedCategories BIGINT ARRAY DEFAULT ARRAY[]::Integer[],
     PRIMARY KEY(idGuild)
 );
 
