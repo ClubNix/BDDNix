@@ -21,7 +21,7 @@ Les paramètres de connexion sont :
 
 Il est également possible de se connecter via un client externe tel que DBeaver, psql, etc. en utilisant le port 3306 et l'adresse localhost
 
-## Pré-requis
+## Pré-requis
 Ajouter dans le dossier un fichier `.env` contenant les valeurs suivantes : 
 
 ```
